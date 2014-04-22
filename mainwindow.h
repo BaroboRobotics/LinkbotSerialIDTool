@@ -18,6 +18,7 @@ public:
 
 public slots:
     void connect();
+    void disconnect();
     void setID();
 
 private:
