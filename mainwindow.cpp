@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     QObject::connect(ui->pushButton_connect, SIGNAL(clicked()),
                      this, SLOT(connect()));
+    QObject::connect(ui->pushButton_disconnect, SIGNAL(clicked()),
+                     this, SLOT(disconnect()));
     QObject::connect(ui->pushButton_setID, SIGNAL(clicked()),
                      this, SLOT(setID()));
 }
@@ -36,6 +38,16 @@ void MainWindow::connect()
         return;
     }
     ui->lineEdit->setText(linkbot_->getID());
+}
+
+void MainWindow::disconnect()
+{
+    if(linkbot_) {
+        linkbot_->disconnect();
+        delete linkbot_;
+        linkbot_ = NULL;
+    }
+    ui->lineEdit->clear();
 }
 
 void MainWindow::setID()
